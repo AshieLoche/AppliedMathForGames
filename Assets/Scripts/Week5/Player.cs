@@ -16,11 +16,11 @@ public class Player : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W))
         {
-            transform.position += 100.0f * Time.deltaTime * transform.up;
+            transform.position += 100.0f * Time.deltaTime * transform.right;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.position += 100.0f * Time.deltaTime * -transform.up;
+            transform.position += 100.0f * Time.deltaTime * -transform.right;
         }
         else if (Input.GetKey(KeyCode.A))
         {
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
             transform.Rotate(transform.forward, Time.deltaTime * -200.0f);
         }
 
-        Debug.DrawRay(transform.position, transform.up * 5.0f, Color.blue);
+        Debug.DrawRay(transform.position, transform.right * 5.0f, Color.blue);
         
     }
 }

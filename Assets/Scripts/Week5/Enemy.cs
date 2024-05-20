@@ -32,14 +32,14 @@ public class Enemy : MonoBehaviour
         else
         {
             Vector3 dir = target - transform.position;
-            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             Quaternion p = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Lerp(transform.rotation, p, Time.deltaTime * 10.0f);
 
             transform.position += 5.0f * Time.deltaTime * transform.right;
         }
 
-        Debug.DrawRay(transform.position, transform.up * 5.0f, Color.yellow);
+        Debug.DrawRay(transform.position, transform.right * 5.0f, Color.yellow);
 
     }
 }
