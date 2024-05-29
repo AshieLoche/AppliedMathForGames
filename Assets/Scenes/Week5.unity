@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2085747584}
-  ViewDistance: 0
-  ViewAngle: 0
+  viewDistance: 10
+  viewAngle: 10
 --- !u!1 &1635735579
 GameObject:
   m_ObjectHideFlags: 0

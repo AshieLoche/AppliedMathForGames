@@ -16,11 +16,11 @@ public class Player : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W))
         {
-            transform.position += 100.0f * Time.deltaTime * transform.right;
+            transform.position += 50.0f * Time.deltaTime * transform.right;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.position += 100.0f * Time.deltaTime * -transform.right;
+            transform.position += 50.0f * Time.deltaTime * -transform.right;
         }
         else if (Input.GetKey(KeyCode.A))
         {

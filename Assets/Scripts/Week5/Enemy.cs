@@ -9,25 +9,55 @@ public class Enemy : MonoBehaviour
     Vector3 target;
 
     public GameObject player;
-    public float ViewDistance;
-    public float ViewAngle;
+    public float viewDistance;
+    public float viewAngle;
 
     // Start is called before the first frame update
     void Start()
     {
+        lastSeen = transform.position;
+        target = player.transform.position;
+    }
+
+    bool SeePlayer()
+    {
+        Vector3 dir = player.transform.position - transform.position;
+
+        if (dir.magnitude < viewDistance)
+        {
+            Debug.DrawRay(transform.position, transform.right * viewDistance, Color.yellow, 0);
+            Debug.DrawRay(transform.position, dir.normalized * viewDistance, Color.yellow, 0);
+            float angle = Vector3.Dot(transform.right, dir.normalized);
+
+            if ((Mathf.Acos(angle) * Mathf.Rad2Deg) < viewAngle)
+            {
+                return true;
+            }
+
+        }
+
+        return false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        lastSeen = transform.position;
-        target = player.transform.position;
+
+        bool seen = SeePlayer();
+
+        if (seen)
+        {
+            lastSeen = player.transform.position;
+            target = lastSeen;
+        }
+
         // When we reach our target
-        if (Vector3.Distance(lastSeen, target) < 0.5f)
+        if (Vector3.Distance(transform.position, target) < 0.5f)
         {
             // At target, pick up new spot to go to
             Quaternion rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
-            target = lastSeen + (rotation * transform.up * 5.0f);
+            target = lastSeen + (rotation * transform.right * 5.0f);
         }
         else
         {
@@ -39,7 +69,11 @@ public class Enemy : MonoBehaviour
             transform.position += 5.0f * Time.deltaTime * transform.right;
         }
 
-        Debug.DrawRay(transform.position, transform.right * 5.0f, Color.yellow);
+        Debug.DrawRay(transform.position, transform.right * viewDistance, seen? Color.red : Color.yellow, 0);
+        Quaternion rayAngle = Quaternion.Euler(0, 0, -viewAngle);
+        Debug.DrawRay(transform.position, rayAngle * transform.right * viewAngle, seen ? Color.red : Color.yellow);
+        rayAngle = Quaternion.Euler(0, 0, viewAngle);
+        Debug.DrawRay(transform.position, rayAngle * transform.right * viewAngle, seen ? Color.red : Color.yellow);
 
     }
 }
