@@ -24,7 +24,7 @@ public class SlerpTest : MonoBehaviour
         var endRelativeCenter = end - center;
 
         var f = 1f / count;
-        for (float i = 0; i < 1+f; i++)
+        for (float i = 0; i < 1 - f; i++)
         {
             yield return Vector3.Slerp(startRelativeCenter, endRelativeCenter, i) + center;
         }
