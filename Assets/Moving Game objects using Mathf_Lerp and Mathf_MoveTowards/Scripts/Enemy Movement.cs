@@ -13,12 +13,6 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float distanceThreshhold;
     [SerializeField] private float rotationAngle;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -26,9 +20,6 @@ public class EnemyMovement : MonoBehaviour
         {
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
-
-        //transform.position = Mathf.MoveTowards
-        //    (transform.position, player.position, speed * Time.deltaTime);
 
         if (player)
         {
