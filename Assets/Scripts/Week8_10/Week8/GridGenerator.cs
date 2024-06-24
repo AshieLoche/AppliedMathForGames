@@ -39,6 +39,7 @@ public class GridGenerator : MonoBehaviour
                 GameObject newTile = Instantiate(tilePrefab, position, Quaternion.identity);
                 newTile.transform.parent = transform;
                 newTile.tag = "Tile";
+                newTile.name = "Tile";
             }
         }
     }
@@ -60,7 +61,7 @@ public class GridGenerator : MonoBehaviour
         // Find all GameObjects tagged as "Tile"
         GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
 
-        // If your assets or prefab are in the "Resources Folder...
+        // If your assets or prefab are in the "Resources" Folder...
         Material material = Resources.Load<Material>("Tile");
 
         // Will apply the "Tile" tag on tiles
