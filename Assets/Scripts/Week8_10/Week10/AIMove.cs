@@ -18,7 +18,6 @@ public class AIMove : MonoBehaviour
     Vector3 heading = new Vector3();
 
     float halfHeight = 0;
-
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
