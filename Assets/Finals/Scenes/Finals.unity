@@ -438,6 +438,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maze Node
       objectReference: {fileID: 0}
+    - target: {fileID: 598386309529812619, guid: ac9f3a1bc8eeea542a912d667f9d50fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8745739607785998213, guid: ac9f3a1bc8eeea542a912d667f9d50fd,
         type: 3}
       propertyPath: m_LocalPosition.x
