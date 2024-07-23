@@ -12,6 +12,8 @@ public class Boomerang : MonoBehaviour
     Transform itemToRotate; // The Weapon that is a child of the empty game object
     Vector3 locationInFrontOfPlayer; // Location in Front of Player to Travel to
 
+    LineRenderer lineRenderer; // Draw the Path
+
     // User this for initialzation
     private void Start()
     {
@@ -28,7 +30,17 @@ public class Boomerang : MonoBehaviour
         locationInFrontOfPlayer = new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z) + player.transform.forward * 9.5f;
 
         StartCoroutine(Boom()); // Now Start the Coroutine
-        
+
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.widthMultiplier = 0.1f;
+        lineRenderer.positionCount = 2;
+        lineRenderer.startColor = Color.green;
+        lineRenderer.endColor = Color.red;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.5f;
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.numCapVertices = 10;
     }
 
     IEnumerator Boom()
@@ -45,12 +57,14 @@ public class Boomerang : MonoBehaviour
 
         if (go)
         {
-            transform.position = Vector3.MoveTowards(transform.position, locationInFrontOfPlayer, Time.deltaTime * 40); // Change the Position to the Location In Front of the Player
+            transform.position = Vector3.MoveTowards(transform.position, locationInFrontOfPlayer, Time.deltaTime * 10); // Change the Position to the Location In Front of the Player
+            DrawLine(transform.position, locationInFrontOfPlayer);
         }
 
         if (!go)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z), Time.deltaTime * 40); // Return to Player
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z), Time.deltaTime * 10); // Return to Player
+            DrawLine(transform.position, new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z + 1));
         }
 
         if (!go && Vector3.Distance(player.transform.position, transform.position) < 1.5)
@@ -59,5 +73,11 @@ public class Boomerang : MonoBehaviour
             boomerang.GetComponent<MeshRenderer>().enabled = true;
             Destroy(this.gameObject);
         }
+    }
+
+    private void DrawLine(Vector3 start, Vector3 end)
+    {
+        lineRenderer.SetPosition(0, start);
+        lineRenderer.SetPosition(1, end);
     }
 }
